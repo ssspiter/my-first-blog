@@ -1,20 +1,12 @@
-<html>
-    <head>
-        <title>SSS_blog</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="/" >Источник </a></h1>
-        </div>
-
-        {% for post in posts %}
-            <div>
-            <h2><a href=''>{{ post.title }}</a></h2>
-            <p><u>Дата создания:</u> {{ post.created_date }}</p>
-            <p><u>Опубликовано:</u> {{ post.published_date }}</p>
-            <p>{{ post.text | linebreaksbr }}</p>
+{% extends 'blog/base.html' %}
+{% block content %} 
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                <p>Опубликовано: {{ post.published_date }}</p>
             </div>
-        {% endfor %}
-
-    </body>
-</html>
+            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+            <p>{{ post.text|linebreaksbr }}</p>
+        </div>
+    {% endfor %} 
+{% endblock %}
